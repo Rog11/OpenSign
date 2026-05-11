@@ -1,11 +1,11 @@
 services:
   - type: web
     name: opensign-server
-    runtime: docker # ← changed from env
+    runtime: image
     plan: free
 
     image:
-      url: opensign/opensignserver:main
+      url: docker.io/opensign/opensignserver:main
 
     # Optional but recommended
     # dockerCommand: node server.js   # only if needed
@@ -15,7 +15,7 @@ services:
         value: production
 
       - key: PUBLIC_URL
-        value: "https://opensign-server.onrender.com" # ← update to your actual service name
+        value: "https://opensign-server.onrender.com"
 
       - key: SERVER_URL
         value: "https://opensign-server.onrender.com/api/app"
