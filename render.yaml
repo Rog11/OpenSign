@@ -1,25 +1,29 @@
 services:
   - type: web
     name: opensign-server
-    env: docker
+    runtime: docker # ← changed from env
     plan: free
 
     image:
       url: opensign/opensignserver:main
+
+    # Optional but recommended
+    # dockerCommand: node server.js   # only if needed
 
     envVars:
       - key: NODE_ENV
         value: production
 
       - key: PUBLIC_URL
-        value: https://your-app.onrender.com
+        value: "https://opensign-server.onrender.com" # ← update to your actual service name
 
       - key: SERVER_URL
-        value: https://your-app.onrender.com/api/app
+        value: "https://opensign-server.onrender.com/api/app"
 
       - key: PARSE_MOUNT
         value: /api/app
 
+      # Secrets / values you'll fill in the dashboard
       - key: MONGODB_URI
         sync: false
 
