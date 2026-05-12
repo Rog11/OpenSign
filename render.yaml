@@ -62,7 +62,7 @@ services:
         value: production
 
       - key: PUBLIC_URL
-        value: "https://opensign-server-rjna.onrender.com"
+        value: "https://opensign-dashboard.onrender.com"
 
       - key: SERVER_URL
         value: "https://opensign-server-rjna.onrender.com/api/app"
@@ -73,7 +73,6 @@ services:
       - key: MASTER_KEY
         sync: false
 
-      # Secrets / values you fill in the Render dashboard
       - key: MONGODB_URI
         sync: false
 
@@ -106,11 +105,12 @@ services:
     image:
       url: docker.io/opensign/opensign:main
 
-    dockerCommand: sh -c "npx serve -s build -l $PORT"
-
     envVars:
       - key: NODE_ENV
         value: production
 
       - key: REACT_APP_SERVERURL
         value: "https://opensign-server-rjna.onrender.com/api/app"
+
+      - key: PUBLIC_URL
+        value: "https://opensign-dashboard.onrender.com"
