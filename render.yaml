@@ -106,7 +106,7 @@ services:
     image:
       url: docker.io/opensign/opensign:main
 
-    dockerCommand: sh -c "serve -s build -l $PORT"
+    dockerCommand: sh -c "npx serve -s build -l $PORT"
 
     envVars:
       - key: NODE_ENV
