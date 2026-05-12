@@ -1,3 +1,53 @@
+# services:
+#   - type: web
+#     name: opensign-server
+#     runtime: image
+#     plan: free
+
+#     image:
+#       url: docker.io/opensign/opensignserver:main
+
+#     # Optional but recommended
+#     # dockerCommand: node server.js   # only if needed
+
+#     envVars:
+#       - key: NODE_ENV
+#         value: production
+
+#       - key: PUBLIC_URL
+#         value: "https://opensign-server-rjna.onrender.com"
+
+#       - key: SERVER_URL
+#         value: "https://opensign-server-rjna.onrender.com/api/app"
+
+#       - key: PARSE_MOUNT
+#         value: /api/app
+
+#       # Secrets / values you'll fill in the dashboard
+#       - key: MONGODB_URI
+#         sync: false
+
+#       - key: DO_SPACE
+#         sync: false
+
+#       - key: DO_ENDPOINT
+#         sync: false
+
+#       - key: DO_BASEURL
+#         sync: false
+
+#       - key: DO_ACCESS_KEY_ID
+#         sync: false
+
+#       - key: DO_SECRET_ACCESS_KEY
+#         sync: false
+
+#       - key: DO_REGION
+#         value: auto
+
+#       - key: USE_LOCAL
+#         value: "false"
+
 services:
   - type: web
     name: opensign-server
@@ -6,9 +56,6 @@ services:
 
     image:
       url: docker.io/opensign/opensignserver:main
-
-    # Optional but recommended
-    # dockerCommand: node server.js   # only if needed
 
     envVars:
       - key: NODE_ENV
@@ -23,7 +70,10 @@ services:
       - key: PARSE_MOUNT
         value: /api/app
 
-      # Secrets / values you'll fill in the dashboard
+      - key: MASTER_KEY
+        sync: false
+
+      # Secrets / values you fill in the Render dashboard
       - key: MONGODB_URI
         sync: false
 
@@ -47,3 +97,20 @@ services:
 
       - key: USE_LOCAL
         value: "false"
+
+  - type: web
+    name: opensign-dashboard
+    runtime: image
+    plan: free
+
+    image:
+      url: docker.io/opensign/opensign:main
+
+    dockerCommand: sh -c "serve -s build -l $PORT"
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      - key: REACT_APP_SERVERURL
+        value: "https://opensign-server-rjna.onrender.com/api/app"
