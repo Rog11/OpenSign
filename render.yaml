@@ -55,7 +55,7 @@ services:
     plan: free
 
     dockerfilePath: apps/OpenSignServer/Dockerhubfile
-    dockerContext: OpenSign
+    dockerContext: .
 
     envVars:
       - key: NODE_ENV
