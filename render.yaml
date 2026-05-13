@@ -61,21 +61,35 @@ services:
       - key: NODE_ENV
         value: production
 
-      - key: PUBLIC_URL
-        value: "https://opensign-dashboard.onrender.com"
+      # 🔥 CRITICAL: identity & auth
+      - key: APP_ID
+        value: opensign
 
-      - key: SERVER_URL
-        value: "https://opensign-server-rjna.onrender.com/api/app"
-
-      - key: PARSE_MOUNT
-        value: /api/app
+      - key: APPLICATION_ID
+        value: opensign
 
       - key: MASTER_KEY
         sync: false
 
+      # 🔥 CRITICAL: prevent localhost fallback in migrations
+      - key: SERVER_URL
+        value: https://opensign-server-rjna.onrender.com/api/app
+
+      - key: PARSE_SERVER_URL
+        value: https://opensign-server-rjna.onrender.com/api/app
+
+      - key: PARSE_MOUNT
+        value: /api/app
+
+      # UI / redirects
+      - key: PUBLIC_URL
+        value: https://opensign-dashboard-0g1v.onrender.com
+
+      # DB
       - key: MONGODB_URI
         sync: false
 
+      # Storage (R2 / S3)
       - key: DO_SPACE
         sync: false
 
@@ -110,7 +124,10 @@ services:
         value: production
 
       - key: REACT_APP_SERVERURL
-        value: "https://opensign-server-rjna.onrender.com/api/app"
+        value: https://opensign-server-rjna.onrender.com/api/app
+
+      - key: REACT_APP_APPID
+        value: opensign
 
       - key: PUBLIC_URL
-        value: "https://opensign-dashboard.onrender.com"
+        value: https://opensign-dashboard-0g1v.onrender.com
