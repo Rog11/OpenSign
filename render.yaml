@@ -51,11 +51,11 @@
 services:
   - type: web
     name: opensign-server
-    runtime: image
+    runtime: docker
     plan: free
 
-    image:
-      url: docker.io/opensign/opensignserver:main
+    dockerfilePath: OpenSign/apps/OpenSignServer/Dockerhubfile
+    dockerContext: OpenSign
 
     envVars:
       - key: NODE_ENV

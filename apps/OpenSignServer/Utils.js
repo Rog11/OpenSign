@@ -7,7 +7,13 @@ import { parseUploadFile } from './utils/fileUtils.js';
 
 dotenv.config({ quiet: true });
 
-export const cloudServerUrl = 'http://localhost:8080/app';
+const defaultPort = process.env.PORT || 8080;
+const defaultMount = process.env.PARSE_MOUNT || '/app';
+const localParseUrl = `http://127.0.0.1:${defaultPort}${defaultMount}`;
+
+// Used by Parse config + various helpers. Prefer explicit SERVER_URL when provided.
+// Falls back to the local in-container URL (works on Render where PORT is dynamic).
+export const cloudServerUrl = process.env.SERVER_URL || localParseUrl;
 export const serverAppId = process.env.APP_ID || 'opensign';
 export const appName = 'OpenSign™';
 export const prefillDraftDocWidget = ['date', 'textbox', 'checkbox', 'radio button', 'image'];

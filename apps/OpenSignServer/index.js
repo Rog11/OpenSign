@@ -244,9 +244,11 @@ if (!process.env.TESTING) {
     const isWindows = process.platform === 'win32';
     // console.log('isWindows', isWindows);
     runDbMigrations();
+    const mountPath = process.env.PARSE_MOUNT || '/app';
+    const localParseUrl = `http://127.0.0.1:${port}${mountPath}`;
     const migrate = isWindows
-      ? `set APPLICATION_ID=${serverAppId}&& set SERVER_URL=${cloudServerUrl}&& set MASTER_KEY=${process.env.MASTER_KEY}&& npx parse-dbtool migrate`
-      : `APPLICATION_ID=${serverAppId} SERVER_URL=${cloudServerUrl} MASTER_KEY=${process.env.MASTER_KEY} npx parse-dbtool migrate`;
+      ? `set APPLICATION_ID=${serverAppId}&& set SERVER_URL=${localParseUrl}&& set MASTER_KEY=${process.env.MASTER_KEY}&& npx parse-dbtool migrate`
+      : `APPLICATION_ID=${serverAppId} SERVER_URL=${localParseUrl} MASTER_KEY=${process.env.MASTER_KEY} npx parse-dbtool migrate`;
     exec(migrate, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error: ${error.message}`);
