@@ -54,7 +54,7 @@ services:
     runtime: docker
     plan: free
 
-    dockerfilePath: OpenSign/apps/OpenSignServer/Dockerhubfile
+    dockerfilePath: apps/OpenSignServer/Dockerhubfile
     dockerContext: OpenSign
 
     envVars:
